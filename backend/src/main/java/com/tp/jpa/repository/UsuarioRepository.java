@@ -33,6 +33,24 @@ public class UsuarioRepository extends BaseRepository<Usuario> {
     }
 
     /**
+     * Retorna el usuario activo dueño del pedido indicado.
+     * Navega desde Usuario hacia su colección u.pedidos para encontrar
+     * a qué usuario pertenece un pedido (necesario para mostrar el nombre en listados).
+     */
+    public Optional<Usuario> buscarUsuarioDePedido(Long pedidoId) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            String jpql = "SELECT u FROM Usuario u JOIN u.pedidos p WHERE p.id = :pid AND u.eliminado = false";
+            List<Usuario> res = em.createQuery(jpql, Usuario.class)
+                    .setParameter("pid", pedidoId)
+                    .getResultList();
+            return res.isEmpty() ? Optional.empty() : Optional.of(res.get(0));
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
      * Retorna los pedidos activos de un usuario dado.
      * Navega desde Usuario hacia su colección u.pedidos mediante JOIN.
      * Filtra por usuario.id = :uid y p.eliminado = false para excluir bajas lógicas.
