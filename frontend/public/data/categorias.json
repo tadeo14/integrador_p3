@@ -1,0 +1,5 @@
+[
+  { "id": 1, "nombre": "Hamburguesas", "descripcion": "Las mejores hamburguesas artesanales", "imagen": "https://via.placeholder.com/150/FF6B35/FFFFFF?text=Burger", "eliminado": false },
+  { "id": 2, "nombre": "Bebidas",      "descripcion": "Gaseosas, jugos y agua",               "imagen": "https://via.placeholder.com/150/4ECDC4/FFFFFF?text=Drink",  "eliminado": false },
+  { "id": 3, "nombre": "Postres",      "descripcion": "Dulces y tortas para el final",         "imagen": "https://via.placeholder.com/150/FFE66D/333333?text=Sweet",  "eliminado": false }
+]

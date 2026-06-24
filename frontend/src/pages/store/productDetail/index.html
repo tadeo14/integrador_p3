@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalle — Food Store</title>
+  <link rel="stylesheet" href="../../../style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a class="navbar-brand" href="#">🍔 Food Store</a>
+    <div class="navbar-links">
+      <a href="../home/index.html">← Volver al catálogo</a>
+      <a href="../cart/index.html">🛒 <span id="cartCount" class="cart-badge">0</span></a>
+      <button id="logoutBtn" class="btn btn-outline btn-sm">Salir</button>
+    </div>
+  </nav>
+
+  <div style="max-width:800px;margin:2rem auto;padding:0 1rem">
+    <div id="productDetail"></div>
+  </div>
+
+  <script type="module" src="./productDetail.ts"></script>
+</body>
+</html>

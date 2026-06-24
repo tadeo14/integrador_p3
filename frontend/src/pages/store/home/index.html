@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo — Food Store</title>
+  <link rel="stylesheet" href="../../../style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a class="navbar-brand" href="#">🍔 Food Store</a>
+    <div class="navbar-links">
+      <span id="userName"></span>
+      <a href="../cart/index.html">🛒 <span id="cartCount" class="cart-badge">0</span></a>
+      <a href="../../client/orders/index.html">Mis pedidos</a>
+      <button id="logoutBtn" class="btn btn-outline btn-sm">Salir</button>
+    </div>
+  </nav>
+
+  <div class="store-layout">
+    <aside class="cat-sidebar">
+      <h3 class="mb-1">Categorías</h3>
+      <ul id="catList"><li>Todas</li></ul>
+    </aside>
+    <main class="store-main">
+      <div class="filter-bar">
+        <input type="text" id="searchInput" placeholder="Buscar producto..." />
+        <select id="sortSelect">
+          <option value="">Ordenar por...</option>
+          <option value="nombre-asc">Nombre A→Z</option>
+          <option value="nombre-desc">Nombre Z→A</option>
+          <option value="precio-asc">Precio ↑</option>
+          <option value="precio-desc">Precio ↓</option>
+        </select>
+      </div>
+      <div id="productGrid" class="grid"></div>
+    </main>
+  </div>
+
+  <script type="module" src="./home.ts"></script>
+</body>
+</html>

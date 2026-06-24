@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis Pedidos — Food Store</title>
+  <link rel="stylesheet" href="../../../style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a class="navbar-brand" href="#">🍔 Food Store</a>
+    <div class="navbar-links">
+      <a href="../../store/home/index.html">← Tienda</a>
+      <button id="logoutBtn" class="btn btn-outline btn-sm">Salir</button>
+    </div>
+  </nav>
+  <div style="max-width:900px;margin:2rem auto;padding:0 1rem">
+    <h1 class="page-title">Mis Pedidos</h1>
+    <div id="ordersList"></div>
+  </div>
+
+  <div id="detailModal" class="modal-overlay">
+    <div class="modal">
+      <button class="modal-close" id="closeModal">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script type="module" src="./orders.ts"></script>
+</body>
+</html>

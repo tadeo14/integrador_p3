@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Categorías — Food Store Admin</title>
+  <link rel="stylesheet" href="../../../style.css" />
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <h2>🍔 Admin</h2>
+      <a href="../adminHome/index.html">Dashboard</a>
+      <a href="./index.html" class="active">Categorías</a>
+      <a href="../products/index.html">Productos</a>
+      <a href="../orders/index.html">Pedidos</a>
+      <a href="../../store/home/index.html">Ver tienda</a>
+      <button id="logoutBtn" class="btn btn-danger btn-sm" style="margin-top:auto;width:100%">Salir</button>
+    </aside>
+    <main class="admin-content">
+      <div class="flex-between mb-2">
+        <h1 class="page-title">Categorías</h1>
+        <button id="newBtn" class="btn btn-primary">+ Nueva categoría</button>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>ID</th><th>Imagen</th><th>Nombre</th><th>Descripción</th><th>Acciones</th></tr></thead>
+          <tbody id="catBody"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <div id="modal" class="modal-overlay">
+    <div class="modal">
+      <button class="modal-close" id="closeModal">✕</button>
+      <h2 id="modalTitle">Nueva categoría</h2>
+      <form id="catForm">
+        <input type="hidden" id="editId" />
+        <div class="form-group"><label>Nombre *</label><input type="text" id="nombre" required /></div>
+        <div class="form-group"><label>Descripción *</label><input type="text" id="descripcion" required /></div>
+        <div class="form-group"><label>Imagen (URL) *</label><input type="text" id="imagen" required /></div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Guardar</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="./categories.ts"></script>
+</body>
+</html>
