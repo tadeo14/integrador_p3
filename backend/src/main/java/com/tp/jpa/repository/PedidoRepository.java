@@ -14,8 +14,8 @@ public class PedidoRepository extends BaseRepository<Pedido> {
     }
 
     /**
-     * Retorna todos los pedidos activos con un estado específico.
-     * Útil para filtrar PENDIENTE, CONFIRMADO, TERMINADO o CANCELADO.
+     * Retorna todos los pedidos activos con un estado especifico.
+     * Util para filtrar PENDIENTE, CONFIRMADO, TERMINADO o CANCELADO.
      */
     public List<Pedido> buscarPorEstado(Estado estado) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();

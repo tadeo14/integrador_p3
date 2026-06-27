@@ -32,12 +32,12 @@ public class ReporteMenu {
         boolean volver = false;
         while (!volver) {
             System.out.println("\n--- REPORTES ---");
-            System.out.println("1. Productos por categoría");
+            System.out.println("1. Productos por categoria");
             System.out.println("2. Pedidos por usuario");
             System.out.println("3. Pedidos por estado");
             System.out.println("4. Total facturado");
             System.out.println("0. Volver");
-            System.out.print("Seleccioná una opción: ");
+            System.out.print("Selecciona una opcion: ");
             String op = scanner.nextLine().trim();
             switch (op) {
                 case "1" -> productosPorCategoria();
@@ -45,25 +45,25 @@ public class ReporteMenu {
                 case "3" -> pedidosPorEstado();
                 case "4" -> totalFacturado();
                 case "0" -> volver = true;
-                default  -> System.out.println("Opción inválida.");
+                default  -> System.out.println("Opcion invalida.");
             }
         }
     }
 
     private void productosPorCategoria() {
         List<Categoria> categorias = categoriaRepo.listarActivos();
-        if (categorias.isEmpty()) { System.out.println("No hay categorías activas."); return; }
+        if (categorias.isEmpty()) { System.out.println("No hay categorias activas."); return; }
         new CategoriaMenu(categoriaRepo, scanner).imprimirListado(categorias);
-        System.out.print("ID de la categoría: ");
+        System.out.print("ID de la categoria: ");
         Long id = parseLong(scanner.nextLine().trim());
-        if (id == null) { System.out.println("ID inválido."); return; }
+        if (id == null) { System.out.println("ID invalido."); return; }
 
         List<Producto> productos = categoriaRepo.buscarProductosPorCategoria(id);
         if (productos.isEmpty()) {
-            System.out.println("La categoría no tiene productos activos.");
+            System.out.println("La categoria no tiene productos activos.");
             return;
         }
-        System.out.println("\n--- PRODUCTOS DE LA CATEGORÍA ---");
+        System.out.println("\n--- PRODUCTOS DE LA CATEGORIA ---");
         System.out.printf("%-5s %-25s %-10s %s%n", "ID", "Nombre", "Precio", "Stock");
         System.out.println("-".repeat(50));
         for (Producto p : productos) {
@@ -78,7 +78,7 @@ public class ReporteMenu {
         new UsuarioMenu(usuarioRepo, scanner).imprimirListado(usuarios);
         System.out.print("ID del usuario: ");
         Long id = parseLong(scanner.nextLine().trim());
-        if (id == null) { System.out.println("ID inválido."); return; }
+        if (id == null) { System.out.println("ID invalido."); return; }
 
         List<Pedido> pedidos = usuarioRepo.buscarPedidosPorUsuario(id);
         if (pedidos.isEmpty()) {
@@ -98,7 +98,7 @@ public class ReporteMenu {
 
     private void pedidosPorEstado() {
         System.out.println("Estados: 1. PENDIENTE  2. CONFIRMADO  3. TERMINADO  4. CANCELADO");
-        System.out.print("Seleccioná: ");
+        System.out.print("Selecciona: ");
         Estado estado = switch (scanner.nextLine().trim()) {
             case "1" -> Estado.PENDIENTE;
             case "2" -> Estado.CONFIRMADO;
@@ -106,7 +106,7 @@ public class ReporteMenu {
             case "4" -> Estado.CANCELADO;
             default  -> null;
         };
-        if (estado == null) { System.out.println("Estado inválido."); return; }
+        if (estado == null) { System.out.println("Estado invalido."); return; }
 
         List<Pedido> pedidos = pedidoRepo.buscarPorEstado(estado);
         if (pedidos.isEmpty()) {

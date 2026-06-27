@@ -32,6 +32,6 @@ public abstract class Base {
             createdAt = LocalDateTime.now();
         }
         // garantiza default false aunque el builder no lo haya seteado
-        // (boolean primitivo ya es false por JVM, esto es solo documentación)
+        // (boolean primitivo ya es false por JVM, esto es solo documentacion)
     }
 }

@@ -22,7 +22,7 @@ public abstract class BaseRepository<T> {
     }
 
     /**
-     * Persiste (alta) o actualiza (modificación) la entidad.
+     * Persiste (alta) o actualiza (modificacion) la entidad.
      * Si id es null usa persist(); si ya tiene id usa merge().
      * Retorna la entidad gestionada — leer el ID generado desde el objeto retornado.
      */
@@ -32,7 +32,7 @@ public abstract class BaseRepository<T> {
             em.getTransaction().begin();
 
             T resultado;
-            // Obtener el id via reflexión sobre Base
+            // Obtener el id via reflexion sobre Base
             Long id = ((com.tp.jpa.model.Base) entity).getId();
             if (id == null) {
                 em.persist(entity);
@@ -80,8 +80,8 @@ public abstract class BaseRepository<T> {
     }
 
     /**
-     * Baja lógica: establece eliminado = true sin borrar el registro de la BD.
-     * Retorna true si se encontró y dio de baja, false si no existía.
+     * Baja logica: establece eliminado = true sin borrar el registro de la BD.
+     * Retorna true si se encontro y dio de baja, false si no existia.
      */
     public boolean eliminarLogico(Long id) {
         EntityManager em = emf.createEntityManager();

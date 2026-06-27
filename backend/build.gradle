@@ -24,6 +24,13 @@ application {
     mainClass = 'com.tp.jpa.Main'
 }
 
+run {
+    // Permite que el Scanner lea desde la consola al usar gradlew run
+    standardInput = System.in
+    // Fuerza UTF-8 en la JVM para evitar caracteres rotos en Windows
+    jvmArgs '-Dfile.encoding=UTF-8', '-Dstdout.encoding=UTF-8', '-Dstderr.encoding=UTF-8'
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'com.tp.jpa.Main'

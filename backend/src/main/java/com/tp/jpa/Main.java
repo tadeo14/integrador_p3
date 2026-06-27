@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("==============================================");
-        System.out.println("     Food Store — Sistema de Gestión         ");
+        System.out.println("     Food Store — Sistema de Gestion         ");
         System.out.println("==============================================");
 
         CategoriaRepository categoriaRepo = new CategoriaRepository();
@@ -28,14 +28,14 @@ public class Main {
 
         boolean salir = false;
         while (!salir) {
-            System.out.println("\n--- MENÚ PRINCIPAL ---");
-            System.out.println("1. Gestionar Categorías");
+            System.out.println("\n--- MENU PRINCIPAL ---");
+            System.out.println("1. Gestionar Categorias");
             System.out.println("2. Gestionar Productos");
             System.out.println("3. Gestionar Usuarios");
             System.out.println("4. Gestionar Pedidos");
             System.out.println("5. Reportes");
             System.out.println("0. Salir");
-            System.out.print("Seleccioná una opción: ");
+            System.out.print("Selecciona una opcion: ");
             String opcion = scanner.nextLine().trim();
             switch (opcion) {
                 case "1" -> categoriaMenu.mostrar();
@@ -44,11 +44,11 @@ public class Main {
                 case "4" -> pedidoMenu.mostrar();
                 case "5" -> reporteMenu.mostrar();
                 case "0" -> salir = true;
-                default  -> System.out.println("Opción inválida. Ingresá un número del 0 al 5.");
+                default  -> System.out.println("Opcion invalida. Ingresa un numero del 0 al 5.");
             }
         }
 
         JPAUtil.close();
-        System.out.println("Aplicación finalizada. ¡Hasta luego!");
+        System.out.println("Aplicacion finalizada. ¡Hasta luego!");
     }
 }

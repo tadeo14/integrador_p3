@@ -14,9 +14,9 @@ public class CategoriaRepository extends BaseRepository<Categoria> {
     }
 
     /**
-     * Retorna los productos activos de una categoría dada.
-     * Navega desde Producto hacia su Categoria (relación @ManyToOne unidireccional),
-     * filtra por categoria.id = :catId y por p.eliminado = false para excluir bajas lógicas.
+     * Retorna los productos activos de una categoria dada.
+     * Navega desde Producto hacia su Categoria (relacion @ManyToOne unidireccional),
+     * filtra por categoria.id = :catId y por p.eliminado = false para excluir bajas logicas.
      */
     public List<Producto> buscarProductosPorCategoria(Long categoriaId) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();

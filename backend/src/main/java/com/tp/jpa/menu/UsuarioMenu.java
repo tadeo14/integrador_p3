@@ -21,14 +21,14 @@ public class UsuarioMenu {
     public void mostrar() {
         boolean volver = false;
         while (!volver) {
-            System.out.println("\n--- GESTIÓN DE USUARIOS ---");
+            System.out.println("\n--- GESTION DE USUARIOS ---");
             System.out.println("1. Alta");
             System.out.println("2. Modificar");
-            System.out.println("3. Baja lógica");
+            System.out.println("3. Baja logica");
             System.out.println("4. Listado");
             System.out.println("5. Buscar por mail");
             System.out.println("0. Volver");
-            System.out.print("Seleccioná una opción: ");
+            System.out.print("Selecciona una opcion: ");
             String op = scanner.nextLine().trim();
             switch (op) {
                 case "1" -> alta();
@@ -37,7 +37,7 @@ public class UsuarioMenu {
                 case "4" -> listado();
                 case "5" -> buscarPorMail();
                 case "0" -> volver = true;
-                default  -> System.out.println("Opción inválida.");
+                default  -> System.out.println("Opcion invalida.");
             }
         }
     }
@@ -57,18 +57,18 @@ public class UsuarioMenu {
 
         System.out.print("Celular (opcional): ");
         String celular = scanner.nextLine().trim();
-        System.out.print("Contraseña: ");
+        System.out.print("Contrasena: ");
         String contrasena = scanner.nextLine().trim();
 
         System.out.println("Rol: 1. ADMIN  2. USUARIO");
-        System.out.print("Seleccioná: ");
+        System.out.print("Selecciona: ");
         String rolStr = scanner.nextLine().trim();
         Rol rol = switch (rolStr) {
             case "1" -> Rol.ADMIN;
             case "2" -> Rol.USUARIO;
             default  -> null;
         };
-        if (rol == null) { System.out.println("Rol inválido."); return; }
+        if (rol == null) { System.out.println("Rol invalido."); return; }
 
         Usuario usuario = Usuario.builder()
                 .nombre(nombre)
@@ -89,7 +89,7 @@ public class UsuarioMenu {
 
         System.out.print("ID a modificar: ");
         Long id = CategoriaMenu.parseLong(scanner.nextLine().trim());
-        if (id == null) { System.out.println("ID inválido."); return; }
+        if (id == null) { System.out.println("ID invalido."); return; }
 
         Optional<Usuario> opt = repo.buscarPorId(id);
         if (opt.isEmpty() || opt.get().isEliminado()) {
@@ -114,7 +114,7 @@ public class UsuarioMenu {
         if (!mail.isEmpty()) {
             Optional<Usuario> existente = repo.buscarPorMail(mail);
             if (existente.isPresent() && !existente.get().getId().equals(id)) {
-                System.out.println("Error: ese mail ya está en uso por otro usuario.");
+                System.out.println("Error: ese mail ya esta en uso por otro usuario.");
             } else {
                 u.setMail(mail);
             }
@@ -125,7 +125,7 @@ public class UsuarioMenu {
         String celular = scanner.nextLine().trim();
         if (!celular.isEmpty()) u.setCelular(celular);
 
-        System.out.print("Nueva contraseña (Enter para conservar): ");
+        System.out.print("Nueva contrasena (Enter para conservar): ");
         String contrasena = scanner.nextLine().trim();
         if (!contrasena.isEmpty()) u.setContrasena(contrasena);
 
@@ -136,7 +136,7 @@ public class UsuarioMenu {
     private void bajaLogica() {
         System.out.print("ID del usuario a dar de baja: ");
         Long id = CategoriaMenu.parseLong(scanner.nextLine().trim());
-        if (id == null) { System.out.println("ID inválido."); return; }
+        if (id == null) { System.out.println("ID invalido."); return; }
 
         Optional<Usuario> opt = repo.buscarPorId(id);
         String nombreCompleto = opt.map(u -> u.getNombre() + " " + u.getApellido()).orElse("(desconocido)");
@@ -144,7 +144,7 @@ public class UsuarioMenu {
         if (repo.eliminarLogico(id)) {
             System.out.println("Usuario \"" + nombreCompleto + "\" dado de baja. Sus pedidos permanecen en el sistema.");
         } else {
-            System.out.println("Error: no se encontró el usuario o ya estaba dado de baja.");
+            System.out.println("Error: no se encontro el usuario o ya estaba dado de baja.");
         }
     }
 

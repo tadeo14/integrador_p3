@@ -30,15 +30,15 @@ public class PedidoMenu {
     public void mostrar() {
         boolean volver = false;
         while (!volver) {
-            System.out.println("\n--- GESTIÓN DE PEDIDOS ---");
+            System.out.println("\n--- GESTION DE PEDIDOS ---");
             System.out.println("1. Alta de pedido");
             System.out.println("2. Cambiar estado");
-            System.out.println("3. Baja lógica");
+            System.out.println("3. Baja logica");
             System.out.println("4. Listado");
             System.out.println("5. Pedidos por usuario");
             System.out.println("6. Pedidos por estado");
             System.out.println("0. Volver");
-            System.out.print("Seleccioná una opción: ");
+            System.out.print("Selecciona una opcion: ");
             String op = scanner.nextLine().trim();
             switch (op) {
                 case "1" -> altaPedido();
@@ -48,23 +48,23 @@ public class PedidoMenu {
                 case "5" -> pedidosPorUsuario();
                 case "6" -> pedidosPorEstado();
                 case "0" -> volver = true;
-                default  -> System.out.println("Opción inválida.");
+                default  -> System.out.println("Opcion invalida.");
             }
         }
     }
 
-    // ── 5.4.1 Alta de pedido: flujo completo en una única transacción ──────────
+    // ── 5.4.1 Alta de pedido: flujo completo en una unica transaccion ──────────
     private void altaPedido() {
-        // 1. Selección de usuario
+        // 1. Seleccion de usuario
         List<Usuario> usuarios = usuarioRepo.listarActivos();
         if (usuarios.isEmpty()) {
-            System.out.println("No hay usuarios activos. Creá un usuario primero.");
+            System.out.println("No hay usuarios activos. Crea un usuario primero.");
             return;
         }
         new UsuarioMenu(usuarioRepo, scanner).imprimirListado(usuarios);
         System.out.print("ID del usuario: ");
         Long idUsuario = parseLong(scanner.nextLine().trim());
-        if (idUsuario == null) { System.out.println("ID inválido."); return; }
+        if (idUsuario == null) { System.out.println("ID invalido."); return; }
         Optional<Usuario> usuOpt = usuarioRepo.buscarPorId(idUsuario);
         if (usuOpt.isEmpty() || usuOpt.get().isEliminado()) {
             System.out.println("Usuario no encontrado o dado de baja.");
@@ -73,14 +73,14 @@ public class PedidoMenu {
 
         // 2. Forma de pago
         System.out.println("Forma de pago: 1. TARJETA  2. TRANSFERENCIA  3. EFECTIVO");
-        System.out.print("Seleccioná: ");
+        System.out.print("Selecciona: ");
         FormaPago formaPago = switch (scanner.nextLine().trim()) {
             case "1" -> FormaPago.TARJETA;
             case "2" -> FormaPago.TRANSFERENCIA;
             case "3" -> FormaPago.EFECTIVO;
             default  -> null;
         };
-        if (formaPago == null) { System.out.println("Forma de pago inválida."); return; }
+        if (formaPago == null) { System.out.println("Forma de pago invalida."); return; }
 
         // 3. Carga de productos en lista temporal (solo IDs y cantidades)
         // La lista guarda idProducto → cantidad acumulada
@@ -104,13 +104,13 @@ public class PedidoMenu {
             }
             Producto prod = prodOpt.get();
             if (!Boolean.TRUE.equals(prod.getDisponible())) {
-                System.out.println("El producto no está disponible.");
+                System.out.println("El producto no esta disponible.");
                 continue;
             }
             System.out.print("Cantidad: ");
             Integer cantidad = parseInt(scanner.nextLine().trim());
             if (cantidad == null || cantidad <= 0) {
-                System.out.println("Cantidad inválida (debe ser mayor a 0).");
+                System.out.println("Cantidad invalida (debe ser mayor a 0).");
                 continue;
             }
             int yaReservado = itemsTemporales.getOrDefault(idProd, 0);
@@ -126,11 +126,11 @@ public class PedidoMenu {
         }
 
         if (itemsTemporales.isEmpty()) {
-            System.out.println("El pedido debe tener al menos un producto. Operación cancelada.");
+            System.out.println("El pedido debe tener al menos un producto. Operacion cancelada.");
             return;
         }
 
-        // 4. Única transacción para persistir todo
+        // 4. Unica transaccion para persistir todo
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {
             em.getTransaction().begin();
@@ -181,7 +181,7 @@ public class PedidoMenu {
     private void cambiarEstado() {
         System.out.print("ID del pedido: ");
         Long id = parseLong(scanner.nextLine().trim());
-        if (id == null) { System.out.println("ID inválido."); return; }
+        if (id == null) { System.out.println("ID invalido."); return; }
 
         Optional<Pedido> opt = pedidoRepo.buscarPorId(id);
         if (opt.isEmpty() || opt.get().isEliminado()) {
@@ -199,18 +199,18 @@ public class PedidoMenu {
             case "4" -> Estado.CANCELADO;
             default  -> null;
         };
-        if (nuevoEstado == null) { System.out.println("Estado inválido."); return; }
+        if (nuevoEstado == null) { System.out.println("Estado invalido."); return; }
 
         pedido.setEstado(nuevoEstado);
         pedidoRepo.guardar(pedido);
         System.out.println("Pedido #" + id + " → estado actualizado a: " + nuevoEstado);
     }
 
-    // ── Baja lógica ────────────────────────────────────────────────────────────
+    // ── Baja logica ────────────────────────────────────────────────────────────
     private void bajaLogica() {
         System.out.print("ID del pedido a dar de baja: ");
         Long id = parseLong(scanner.nextLine().trim());
-        if (id == null) { System.out.println("ID inválido."); return; }
+        if (id == null) { System.out.println("ID invalido."); return; }
 
         Optional<Pedido> opt = pedidoRepo.buscarPorId(id);
         Double total = opt.map(Pedido::getTotal).orElse(null);
@@ -219,7 +219,7 @@ public class PedidoMenu {
             System.out.printf("Pedido #%d dado de baja. Total: $%.2f. El stock NO se restaura.%n",
                     id, total != null ? total : 0.0);
         } else {
-            System.out.println("Error: no se encontró el pedido o ya estaba dado de baja.");
+            System.out.println("Error: no se encontro el pedido o ya estaba dado de baja.");
         }
     }
 
@@ -248,7 +248,7 @@ public class PedidoMenu {
         new UsuarioMenu(usuarioRepo, scanner).imprimirListado(usuarios);
         System.out.print("ID del usuario: ");
         Long id = parseLong(scanner.nextLine().trim());
-        if (id == null) { System.out.println("ID inválido."); return; }
+        if (id == null) { System.out.println("ID invalido."); return; }
 
         List<Pedido> pedidos = usuarioRepo.buscarPedidosPorUsuario(id);
         if (pedidos.isEmpty()) {
@@ -268,7 +268,7 @@ public class PedidoMenu {
     // ── Pedidos por estado ─────────────────────────────────────────────────────
     private void pedidosPorEstado() {
         System.out.println("Estados: 1. PENDIENTE  2. CONFIRMADO  3. TERMINADO  4. CANCELADO");
-        System.out.print("Seleccioná: ");
+        System.out.print("Selecciona: ");
         Estado estado = switch (scanner.nextLine().trim()) {
             case "1" -> Estado.PENDIENTE;
             case "2" -> Estado.CONFIRMADO;
@@ -276,7 +276,7 @@ public class PedidoMenu {
             case "4" -> Estado.CANCELADO;
             default  -> null;
         };
-        if (estado == null) { System.out.println("Estado inválido."); return; }
+        if (estado == null) { System.out.println("Estado invalido."); return; }
 
         List<Pedido> pedidos = pedidoRepo.buscarPorEstado(estado);
         if (pedidos.isEmpty()) {

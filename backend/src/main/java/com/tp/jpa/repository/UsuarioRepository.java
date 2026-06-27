@@ -16,8 +16,8 @@ public class UsuarioRepository extends BaseRepository<Usuario> {
     }
 
     /**
-     * Busca un usuario activo por su dirección de correo electrónico.
-     * Retorna Optional para manejar el caso en que el mail no esté registrado.
+     * Busca un usuario activo por su direccion de correo electronico.
+     * Retorna Optional para manejar el caso en que el mail no este registrado.
      */
     public Optional<Usuario> buscarPorMail(String mail) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
@@ -33,9 +33,9 @@ public class UsuarioRepository extends BaseRepository<Usuario> {
     }
 
     /**
-     * Retorna el usuario activo dueño del pedido indicado.
-     * Navega desde Usuario hacia su colección u.pedidos para encontrar
-     * a qué usuario pertenece un pedido (necesario para mostrar el nombre en listados).
+     * Retorna el usuario activo dueno del pedido indicado.
+     * Navega desde Usuario hacia su coleccion u.pedidos para encontrar
+     * a que usuario pertenece un pedido (necesario para mostrar el nombre en listados).
      */
     public Optional<Usuario> buscarUsuarioDePedido(Long pedidoId) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
@@ -52,8 +52,8 @@ public class UsuarioRepository extends BaseRepository<Usuario> {
 
     /**
      * Retorna los pedidos activos de un usuario dado.
-     * Navega desde Usuario hacia su colección u.pedidos mediante JOIN.
-     * Filtra por usuario.id = :uid y p.eliminado = false para excluir bajas lógicas.
+     * Navega desde Usuario hacia su coleccion u.pedidos mediante JOIN.
+     * Filtra por usuario.id = :uid y p.eliminado = false para excluir bajas logicas.
      */
     public List<Pedido> buscarPedidosPorUsuario(Long idUsuario) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
