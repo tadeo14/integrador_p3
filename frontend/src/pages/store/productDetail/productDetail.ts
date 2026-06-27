@@ -24,7 +24,7 @@ async function init() {
 
   container.innerHTML = `
     <div class="card" style="display:flex;gap:1.5rem;padding:1.5rem">
-      <img src="${p.imagen || 'https://via.placeholder.com/300'}" alt="${p.nombre}"
+      <img src="${p.imagen || 'https://placehold.co/300x200/cccccc/999999?text=Imagen'}" alt="${p.nombre}"
            style="width:280px;height:280px;object-fit:cover;border-radius:8px;flex-shrink:0" />
       <div style="flex:1">
         <h1 style="margin-bottom:.5rem">${p.nombre}</h1>

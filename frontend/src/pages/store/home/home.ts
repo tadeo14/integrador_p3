@@ -64,7 +64,7 @@ function renderGrid() {
 
   grid.innerHTML = productos.map(p => `
     <div class="card product-card" data-id="${p.id}">
-      <img src="${p.imagen || 'https://via.placeholder.com/300/ccc/999?text=Producto'}" alt="${p.nombre}" />
+      <img src="${p.imagen || 'https://placehold.co/300x200/cccccc/999999?text=Producto'}" alt="${p.nombre}" />
       <div class="info">
         <h3>${p.nombre}</h3>
         <p style="font-size:.85rem;color:#666;margin:.3rem 0">${p.descripcion}</p>

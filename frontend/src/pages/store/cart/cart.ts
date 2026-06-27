@@ -27,7 +27,7 @@ function render() {
       <div style="flex:1;min-width:280px">
         ${cart.map(item => `
           <div class="cart-item">
-            <img src="${item.imagen || 'https://via.placeholder.com/70'}" alt="${item.nombre}" />
+            <img src="${item.imagen || 'https://placehold.co/70x70/cccccc/999999?text=+'}" alt="${item.nombre}" />
             <div class="info">
               <strong>${item.nombre}</strong>
               <div>$${item.precio.toLocaleString()} c/u</div>
