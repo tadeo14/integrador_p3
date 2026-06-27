@@ -27,27 +27,32 @@ com.tp.jpa/
 ### Requisitos
 
 - Java 17 o superior
-- Gradle 8+ (o usar el wrapper incluido)
+- **No se requiere Gradle instalado** — el proyecto incluye el Gradle Wrapper (`gradlew`)
 
-### Ejecutar
+### Ejecutar en Windows (PowerShell o CMD)
+
+```powershell
+cd backend
+.\gradlew.bat run
+```
+
+### Ejecutar en Linux / macOS
 
 ```bash
 cd backend
-gradle run
+./gradlew run
 ```
 
-La base de datos se crea automáticamente en `./data/jpa_db.mv.db` al primer arranque (`hbm2ddl.auto = update`).
+La primera vez, el wrapper descarga automáticamente Gradle. La base de datos se crea en `./data/jpa_db.mv.db` al primer arranque (`hbm2ddl.auto = update`).
 
-### Compilar sin ejecutar
+### Otros comandos útiles
 
-```bash
-gradle compileJava
-```
+```powershell
+# Solo compilar
+.\gradlew.bat compileJava
 
-### Generar JAR ejecutable
-
-```bash
-gradle jar
+# Generar JAR ejecutable
+.\gradlew.bat jar
 java -jar build/libs/food-store-backend-1.0.jar
 ```
 
