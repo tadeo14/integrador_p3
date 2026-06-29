@@ -1,10 +1,15 @@
 import { getProductos, getCategorias } from '../../../utils/api'
-import { requireAuth, logout } from '../../../utils/auth'
+import { getCurrentUser, logout } from '../../../utils/auth'
 import { addToCart, cartCount } from '../../../utils/cart'
 
-requireAuth()
-document.getElementById('logoutBtn')!.addEventListener('click', logout)
+const user = getCurrentUser()
+
 document.getElementById('cartCount')!.textContent = String(cartCount())
+if (user) {
+  document.getElementById('loginLink')!.style.display = 'none'
+  document.getElementById('logoutBtn')!.style.display = ''
+  document.getElementById('logoutBtn')!.addEventListener('click', logout)
+}
 
 const params = new URLSearchParams(location.search)
 const id = Number(params.get('id'))
@@ -51,6 +56,10 @@ async function init() {
 
   if (disponible) {
     document.getElementById('addBtn')!.addEventListener('click', () => {
+      if (!user) {
+        window.location.href = '/src/pages/auth/login/index.html'
+        return
+      }
       const qty = Number((document.getElementById('qty') as HTMLInputElement).value)
       if (qty < 1 || qty > p.stock) {
         document.getElementById('confirm')!.textContent = `Cantidad inválida (máx. ${p.stock})`

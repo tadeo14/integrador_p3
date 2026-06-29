@@ -1,12 +1,21 @@
 import { getCategorias, getProductos } from '../../../utils/api'
-import { requireAuth, logout } from '../../../utils/auth'
+import { getCurrentUser, logout } from '../../../utils/auth'
 import { cartCount } from '../../../utils/cart'
 import type { Categoria, Producto } from '../../../types'
 
-const user = requireAuth()
-document.getElementById('userName')!.textContent = `Hola, ${user.nombre}`
-document.getElementById('logoutBtn')!.addEventListener('click', logout)
+const user = getCurrentUser()
+
+// Navbar dinámico según sesión
 document.getElementById('cartCount')!.textContent = String(cartCount())
+if (user) {
+  document.getElementById('userName')!.textContent = `Hola, ${user.nombre}`
+  document.getElementById('loginLink')!.style.display = 'none'
+  document.getElementById('logoutBtn')!.style.display = ''
+  document.getElementById('ordersLink')!.style.display = ''
+  document.getElementById('logoutBtn')!.addEventListener('click', logout)
+} else {
+  document.getElementById('userName')!.textContent = ''
+}
 
 let allProductos: Producto[] = []
 let categorias: Categoria[] = []
@@ -15,7 +24,6 @@ let selectedCatId: number | null = null
 async function init() {
   [categorias, allProductos] = await Promise.all([getCategorias(), getProductos()])
 
-  // Solo categorías activas
   const catActivas = categorias.filter(c => !c.eliminado)
   const catList = document.getElementById('catList')!
   catList.innerHTML = '<li class="active" data-id="all">Todas</li>'
