@@ -1,3 +1,4 @@
+
 # Food Store — Frontend
 
 Frontend web del sistema de gestión de pedidos Food Store.
