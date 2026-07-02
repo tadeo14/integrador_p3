@@ -42,7 +42,7 @@ cd backend
 cd backend
 ./gradlew run
 ```
-
+4
 La primera vez, el wrapper descarga automáticamente Gradle. La base de datos se crea en `./data/jpa_db.mv.db` al primer arranque (`hbm2ddl.auto = update`).
 
 ### Otros comandos útiles
